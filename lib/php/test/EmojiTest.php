@@ -25,7 +25,7 @@ class EmojiTest extends \PHPUnit_Framework_TestCase
         {
             $data[] = array(
                 $emoji['shortname'],
-                $emoji['unicode'],
+                $emoji['code_points']['fully_qualified'],
             );
         }
 
@@ -46,19 +46,23 @@ class EmojiTest extends \PHPUnit_Framework_TestCase
 
         $unicode = Emojione::shortnameToUnicode($shortname);
 
-        $this->assertNotTrue($unicode === $shortname);
+        $this->assertFalse($unicode === $shortname);
 
         $this->assertTrue(isset($shortcode_replace[$shortname]));
-        $this->assertEquals($shortcode_replace[$shortname], $simple_unicode);
+        $this->assertEquals($shortcode_replace[$shortname][0], $simple_unicode);
         $this->assertTrue(in_array($unicode, $unicode_replace));
         $this->assertEquals($unicode_replace[$shortname], $unicode);
 
         $convert_unicode = strtolower(Emojione::convert($simple_unicode));
 
-        $image_template = '<img class="emojione" alt="%1$s" src="https://cdn.jsdelivr.net/emojione/assets/' . $this->emojiVersion . '/png/32/%2$s.png"/>';
+        $expected = sprintf(
+            '<img class="emojione" alt="%1$s" title="%2$s" src="https://cdn.jsdelivr.net/emojione/assets/%3$s/png/32/%4$s.png"/>',
+            $convert_unicode,
+            $shortname,
+            $this->emojiVersion,
+            $simple_unicode
+        );
 
-        $image = sprintf($image_template, $convert_unicode, $simple_unicode);
-
-        $this->assertEquals(Emojione::toImage($shortname), $image);
+        $this->assertEquals($expected, Emojione::toImage($shortname));
     }
 }

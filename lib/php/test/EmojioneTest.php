@@ -42,7 +42,7 @@ class EmojioneTest extends \PHPUnit_Framework_TestCase
         $test     = 'Hello world! 😄 :smile:';
         $expected = 'Hello world! <img class="emojione" alt="😄" title=":smile:" src="https://cdn.jsdelivr.net/emojione/assets/' . $this->emojiVersion . '/png/32/1f604.png"/> <img class="emojione" alt="&#x1f604;" title=":smile:" src="https://cdn.jsdelivr.net/emojione/assets/' . $this->emojiVersion . '/png/32/1f604.png"/>';
 
-        $this->assertEquals(Emojione::toImage($test), $expected);
+        $this->assertEquals($expected, Emojione::toImage($test));
     }
 
     /**
@@ -55,7 +55,7 @@ class EmojioneTest extends \PHPUnit_Framework_TestCase
         $test     = 'Hello world! 😄 :smile:';
         $expected = 'Hello world! 😄 😄';
 
-        $this->assertEquals(Emojione::unifyUnicode($test), $expected);
+        $this->assertEquals($expected, Emojione::unifyUnicode($test));
     }
 
     /**
@@ -68,7 +68,7 @@ class EmojioneTest extends \PHPUnit_Framework_TestCase
         $test     = 'Hello world! 😄 :smile:';
         $expected = 'Hello world! 😄 😄';
 
-        $this->assertEquals(Emojione::shortnameToUnicode($test), $expected);
+        $this->assertEquals($expected, Emojione::shortnameToUnicode($test));
     }
 
 
@@ -82,7 +82,7 @@ class EmojioneTest extends \PHPUnit_Framework_TestCase
         $test     = 'Hello world! 🙂 :slight_smile:';
         $expected = 'Hello world! 🙂 :]';
 
-        $this->assertEquals(Emojione::shortnameToAscii($test), $expected);
+        $this->assertEquals($expected, Emojione::shortnameToAscii($test));
     }
 
     /**
@@ -95,7 +95,7 @@ class EmojioneTest extends \PHPUnit_Framework_TestCase
         $test     = 'Hello world! 😄 :smile:';
         $expected = 'Hello world! 😄 <img class="emojione" alt="&#x1f604;" title=":smile:" src="https://cdn.jsdelivr.net/emojione/assets/' . $this->emojiVersion . '/png/32/1f604.png"/>';
 
-        $this->assertEquals(Emojione::shortnameToImage($test), $expected);
+        $this->assertEquals($expected, Emojione::shortnameToImage($test));
     }
 
     /**
@@ -108,7 +108,7 @@ class EmojioneTest extends \PHPUnit_Framework_TestCase
         $test     = 'Hello world! 😄 :smile:';
         $expected = 'Hello world! :smile: :smile:';
 
-        $this->assertEquals(Emojione::toShort($test), $expected);
+        $this->assertEquals($expected, Emojione::toShort($test));
     }
     /**
      *
@@ -121,7 +121,7 @@ class EmojioneTest extends \PHPUnit_Framework_TestCase
         $test     = 'Hello world! :) :D ;) :smile:';
         $expected = 'Hello world! :slight_smile: :smiley: :wink: :smile:';
 
-        $this->assertEquals(Emojione::asciiToShortname($test), $expected);
+        $this->assertEquals($expected, Emojione::asciiToShortname($test));
     }
 
     /**
@@ -144,6 +144,6 @@ class EmojioneTest extends \PHPUnit_Framework_TestCase
         $test     = 'Hello world! 😄 :smile:';
         $expected = 'Hello world! <img class="emojione" alt="😄" title=":smile:" src="https://cdn.jsdelivr.net/emojione/assets/' . $this->emojiVersion . '/png/32/1f604.png"/> :smile:';
 
-        $this->assertEquals(Emojione::unicodeToImage($test), $expected);
+        $this->assertEquals($expected, Emojione::unicodeToImage($test));
     }
 }
